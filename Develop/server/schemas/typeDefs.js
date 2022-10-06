@@ -8,36 +8,45 @@ type User {
     _id: ID
     username: String
     email: String
-    friendCount: Int
-    thoughts: [Thought]
-    friends: [User]
+    bookCount: Int
+    savedBooks: [Book]
   }
 type Book {
-    _id: ID
-    thoughtText: String
-    createAt: String
-    username: String
-    reactionCount: Int
-    reactions: [Reaction]
+    bookId: ID
+    authors: [String]
+    description: String
+    image: String
+    link: String
+    title: String
 }
-type Reaction {
-    _id: ID
-    reactionBody: String
-    createdAt: String
-    username: String
+input BookInput {
+authors: [String]
+description: String
+bookId: String
+image: String
+link: String
+title: String
+}
+type Auth {
+    token: ID
+    user: User
+    
   }
   type Query {
-    users: [User]
-    user(username: String!): User
-    thoughts(username: String): [Thought]
-    thought(_id: ID!): Thought
-  }
+    me : User
+   
   type Mutation {
-    login(email: String!, password: String!): User
-    addUser(username: String!, email: String!, password: String!): User
-  }
+    login(email: String!, password: String!): Auth
+    addUser(username: String!, email: String!, password: String!): Auth
+    saveBook(bookData: BookInput): User
+    removeBook(bookId: ID): User
+  };
+   
+   
+  
+  
 `;
-`;
+
 
 // export the typeDefs
 module.exports = typeDefs;
