@@ -4,7 +4,7 @@ import { Form, Button, Alert } from 'react-bootstrap';
 import { useMutation } from "@apollo/react-hooks";
 
 import Auth from '../utils/auth';
-import { LOGIN_USER } from '../utils/mutation';
+import { LOGIN_USER } from '../utils/mutations';
 
 const LoginForm = () => {
   const [userFormData, setUserFormData] = useState({ email: '', password: '' });
@@ -53,9 +53,9 @@ const [login, {error}] = useMutation(LOGIN_USER)
     <>
       <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
         <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
-          Something went wrong with your login credentials!
+          Somethings wrong with login credentials!
         </Alert>
-        <Form.Group>
+<Form.Group>
           <Form.Label htmlFor='email'>Email</Form.Label>
           <Form.Control
             type='text'
@@ -82,7 +82,9 @@ const [login, {error}] = useMutation(LOGIN_USER)
           <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
         </Form.Group>
         <Button
-          disabled={!(userFormData.email && userFormData.password)}
+          disabled={!(userFormData.username &&
+            userFormData.email &&
+             userFormData.password )}
           type='submit'
           variant='success'>
           Submit
